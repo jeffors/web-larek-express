@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 interface IImage {
-  filename: string;
+  fileName: string;
   originalName: string;
 }
 
@@ -14,7 +14,7 @@ interface IProduct {
 }
 
 const imageSchema = new mongoose.Schema<IImage>({
-  filename: {
+  fileName: {
     type: String,
     required: true,
   },

@@ -4,7 +4,7 @@ import product from "../models/product";
 export const getProducts = async (req: Request, res: Response) => {
   return product
     .find({})
-    .then((products) => res.send({ products }))
+    .then((products) => res.send({ items: products, total: products.length })) // TODO: remove _id from image
     .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
 };
 
@@ -13,5 +13,5 @@ export const createProduct = async (req: Request, res: Response) => {
   return product
     .create({ title, image, category, description, price })
     .then((product) => res.send({ product }))
-    .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
+    .catch((err) => res.status(500).send({ message: err }));
 };
