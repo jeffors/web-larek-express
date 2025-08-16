@@ -7,15 +7,18 @@ import orderRouter from "./routes/order";
 import path from "path";
 import { errors } from "celebrate";
 import errorHandler from "./middlewares/error-handler";
+import { errorLogger, requestLogger } from "./middlewares/logger";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.DB_ADDRESS!);
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(cors());
+app.use(requestLogger);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 app.listen(3000, () => {
