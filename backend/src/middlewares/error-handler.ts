@@ -1,3 +1,4 @@
+import { isCelebrateError } from "celebrate";
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
 const errorHandler: ErrorRequestHandler = (
