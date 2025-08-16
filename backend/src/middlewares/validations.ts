@@ -7,6 +7,9 @@ export const orderRouteValidator = celebrate({
     phone: Joi.string().required(),
     address: Joi.string().required(),
     total: Joi.number().required(),
-    items: Joi.array().items(Joi.string().min(1).required()).required(),
+    items: Joi.array()
+      .items(Joi.string().hex().length(24).required())
+      .min(1)
+      .required(),
   }),
 });
