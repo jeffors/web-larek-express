@@ -1,9 +1,9 @@
-import { orderRouteValidator } from "../middlewares/validations";
+import { createOrderValidator } from "../middlewares/validations";
 import { createOrder } from "../controllers/order";
 import express from "express";
 
 const orderRouter = express.Router();
 
-orderRouter.post("/", orderRouteValidator, createOrder);
+orderRouter.post("/", createOrderValidator, createOrder);
 
 export default orderRouter;

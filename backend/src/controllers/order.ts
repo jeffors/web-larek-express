@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker/locale/ru";
 import { NextFunction, Request, Response } from "express";
 import product from "../models/product";
+import BadRequestError from "../errors/bad-request-error";
 
 export const createOrder = async (
   req: Request,
@@ -14,19 +15,23 @@ export const createOrder = async (
   for (const item of items) {
     const product = products.find((p) => p._id.toString() === item);
     if (!product) {
-      return res.status(400).send({
-        message: "Указанный товар не найден",
-      });
+      return next(new BadRequestError("Товары в заказе не были найдены"));
     }
     if (product.price === null) {
-      return res.status(400).send({ message: "Указанный товар не продаётся" });
+      return next(
+        new BadRequestError(
+          `Товар ${product.title} на данный момент не продаётся`
+        )
+      );
     }
     productsTotal += product.price;
   }
   if (productsTotal !== total) {
-    return res
-      .status(400)
-      .send({ message: "Сумма заказа не совпадает с суммой цен товаров" });
+      return next(
+        new BadRequestError(
+          "Указанная цена заказа не совпадает с суммой цен товаров"
+        )
+      );
   }
   const orderId = faker.string.uuid();
   return res.status(200).send({ id: orderId, total: productsTotal });
