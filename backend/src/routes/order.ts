@@ -1,4 +1,4 @@
-import { orderRouteValidator } from "middlewares/validations";
+import { orderRouteValidator } from "../middlewares/validations";
 import { createOrder } from "../controllers/order";
 import express from "express";
 

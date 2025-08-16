@@ -5,6 +5,7 @@ import "dotenv/config";
 import productRouter from "./routes/product";
 import orderRouter from "./routes/order";
 import path from "path";
+import { errors } from "celebrate";
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cors());
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(errors());
 app.listen(3000, () => {
   console.log("listening on port 3000");
 });
