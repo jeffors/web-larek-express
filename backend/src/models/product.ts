@@ -1,3 +1,4 @@
+import { tr } from "@faker-js/faker/.";
 import mongoose from "mongoose";
 
 interface IImage {
@@ -30,6 +31,7 @@ const productSchema = new mongoose.Schema<IProduct>({
     required: true,
     minlength: 2,
     maxlength: 30,
+    unique: true
   },
   image: { type: imageSchema, required: true },
   category: {
