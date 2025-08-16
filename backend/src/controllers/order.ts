@@ -29,5 +29,5 @@ export const createOrder = async (
       .send({ message: "Сумма заказа не совпадает с суммой цен товаров" });
   }
   const orderId = faker.string.uuid();
-  return res.status(201).send({ id: orderId, total: productsTotal });
+  return res.status(200).send({ id: orderId, total: productsTotal });
 };
