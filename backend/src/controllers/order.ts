@@ -27,11 +27,11 @@ export const createOrder = async (
     productsTotal += product.price;
   }
   if (productsTotal !== total) {
-      return next(
-        new BadRequestError(
-          "Указанная цена заказа не совпадает с суммой цен товаров"
-        )
-      );
+    return next(
+      new BadRequestError(
+        "Указанная цена заказа не совпадает с суммой цен товаров"
+      )
+    );
   }
   const orderId = faker.string.uuid();
   return res.status(200).send({ id: orderId, total: productsTotal });

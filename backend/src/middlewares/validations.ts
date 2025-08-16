@@ -20,8 +20,7 @@ export const createProductValidator = celebrate({
     image: Joi.object({
       fileName: Joi.string().required(),
       originalName: Joi.string().required(),
-    })
-      .required(),
+    }).required(),
     category: Joi.string().required(),
     description: Joi.string().optional(),
     price: Joi.number().allow(null).default(null),
