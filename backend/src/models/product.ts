@@ -1,5 +1,5 @@
-import { tr } from "@faker-js/faker/.";
-import mongoose from "mongoose";
+import { tr } from '@faker-js/faker/.';
+import mongoose from 'mongoose';
 
 interface IImage {
   fileName: string;
@@ -49,4 +49,4 @@ const productSchema = new mongoose.Schema<IProduct>({
   },
 });
 
-export default mongoose.model<IProduct>("product", productSchema);
+export default mongoose.model<IProduct>('product', productSchema);
