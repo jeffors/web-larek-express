@@ -9,10 +9,11 @@ import orderRouter from './routes/order';
 import errorHandler from './middlewares/error-handler';
 import { errorLogger, requestLogger } from './middlewares/logger';
 
+const { DB_ADDRESS = 'mongodb://127.0.0.1:27017/web-larek' } = process.env;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect(process.env.DB_ADDRESS!);
+mongoose.connect(DB_ADDRESS);
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(cors());
 app.use(requestLogger);
