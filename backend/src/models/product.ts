@@ -1,4 +1,3 @@
-import { tr } from '@faker-js/faker/.';
 import mongoose from 'mongoose';
 
 interface IImage {

@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { MongooseError } from 'mongoose';
-import product from '../models/product';
+import productModel from '../models/product';
 import ConflictError from '../errors/conflict-error';
 import BadRequestError from '../errors/bad-request-error';
 
 export const getProducts = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
-) => product
+) => productModel
   .find({})
   .then((products) => res.status(200).send({ items: products, total: products.length }))
   .catch(() => next(new Error('На сервере произошла непредвиденная ошибка')));
@@ -21,7 +21,7 @@ export const createProduct = async (
   const {
     title, image, category, description, price,
   } = req.body;
-  return product
+  return productModel
     .create({
       title, image, category, description, price,
     })
@@ -35,5 +35,6 @@ export const createProduct = async (
       if (err instanceof MongooseError && err.name === 'ValidationError') {
         return next(new BadRequestError(err.message));
       }
+      return next(new Error('На сервере произошла непредвиденная ошибка'));
     });
 };
